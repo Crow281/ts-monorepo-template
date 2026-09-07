@@ -1,0 +1,49 @@
+{
+    "name": "workspace",
+    "private": true,
+    "type": "module",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "add-package": "tsx ./config/template/scripts/AddPackage.ts",
+        "knip": "knip --config config/knip/knip.config.ts",
+        "lint": "eslint --config ./config/eslint/eslint.config.mjs",
+        "fix": "eslint --fix --config ./config/eslint/eslint.config.mjs",
+        "format": "prettier --config ./config/prettier/prettierrc.config.js --ignore-path ./config/prettier/.prettierignore --write .",
+        "clean:dist": "rimraf --glob 'packages/*/dist'",
+        "clean:doc": "rimraf --glob 'doc/api/latest'",
+        "clean": "npm run clean:dist && npm run clean:doc",
+        "build": "tsdown --workspace",
+        "dev": "tsdown --watch -workspace",
+        "test": "vitest --config ./config/vitest/vitest.config.ts",
+        "release": "bumpp --configFilePath ./config/bumpp/bump.config.ts -r",
+        "prepublishOnly": "pnpm run build",
+        "doc": "typedoc --options config/typedoc/typedoc.config.js"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@limegrass/eslint-plugin-import-alias": "^1.6.1",
+        "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+        "@types/mustache": "^4.2.6",
+        "@types/node": "^26.4.0",
+        "bumpp": "^12.2.2",
+        "eslint": "^10.9.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-import-resolver-typescript": "^4.4.5",
+        "eslint-plugin-import-x": "^4.17.1",
+        "eslint-plugin-tsdoc": "^0.5.2",
+        "globals": "^17.11.0",
+        "knip": "^6.32.3",
+        "mustache": "^4.2.0",
+        "prettier": "^3.9.6",
+        "rimraf": "^6.1.3",
+        "tsdown": "^0.22.14",
+        "tsx": "^4.23.12",
+        "typedoc": "^0.28.20",
+        "typedoc-plugin-mdn-links": "^5.1.1",
+        "typescript": "^6.0.3",
+        "typescript-eslint": "^8.68.0",
+        "vitest": "^4.1.11"
+    }
+}

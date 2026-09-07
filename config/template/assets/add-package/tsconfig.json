@@ -1,0 +1,29 @@
+//TypeScript config file for package source scripts.
+{
+    //Extended build file. Records the desired compiler options.
+    "extends": "../../config/ts/tsconfig.base.json",
+
+    //List of glob patterns indicating which files to build.
+    "include": [
+        //Project source.
+        "src"
+    ],
+
+    //List of glob patterns indicating which files NOT to build.
+    "exclude": [],
+
+    //How to compile.
+    "compilerOptions": {
+        //Use source as the root so that the
+        //source folder itself is not output to dist.
+        "rootDir": "./src",
+
+        //Remaps paths.
+        //This is so that I can import from
+        //absolute paths instead of relative ones.
+        "paths": {
+            //Path alias for package source files.
+            "@/*": ["./src/*"]
+        }
+    }
+}

@@ -1,3 +1,6 @@
+# Built Docs
+doc/api
+
 # Logs
 logs
 *.log

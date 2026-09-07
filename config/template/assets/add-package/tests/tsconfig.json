@@ -1,0 +1,37 @@
+//TypeScript configuration for package test scripts.
+{
+    //Extended build file. Records the desired compiler options.
+    "extends": "../../../config/ts/tsconfig.base.json",
+
+    //List of glob patterns indicating which files to build.
+    "include": [
+        //Include the source scripts we are testing.
+        "../src",
+
+        //Include the test scripts form inside the immediate folder.
+        "."
+    ],
+
+    //List of glob patterns indicating which files NOT to build.
+    "exclude": [],
+
+    //How to compile.
+    "compilerOptions": {
+        //Use package as the root so that test scripts can
+        //access everything in the package.
+        //Test scripts are not built and we therefore
+        //don't need to worry about "tests" or "src" being output.
+        "rootDir": "../",
+
+        //Remaps paths.
+        //This is so that I can import from
+        //absolute paths instead of relative ones.
+        "paths": {
+            //Path alias for package source files.
+            "@/*": ["../src/*"],
+
+            //Path alias for test exclusive source files.
+            "@tests/*": ["./*"]
+        }
+    }
+}

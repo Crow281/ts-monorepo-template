@@ -1,0 +1,65 @@
+//This tsconfig file is the base for the project tsconfig files.
+//Used to define the default compiler options most of them use.
+{
+    //How to compile.
+    "compilerOptions": {
+        //JavaScript language version being transpiled to.
+        //Determines the minimum JavaScript version user requires.
+        "target": "esnext",
+        //List of basic libraries the project is using.
+        "lib": [
+            //Standard JavaScript APIs up to year 2023.
+            "es2023",
+
+            //Web library, giving access to stuff like Window, Document, etc.
+            "dom"
+        ],
+        //How the project should decide whether a given file is a script or module.
+        "moduleDetection": "force",
+        //Module system of the project,
+        //deciding how modules are loaded and linked.
+        "module": "preserve",
+        //How to lookup modules.
+        //Since we are using a custom bundler, select bundler.
+        "moduleResolution": "bundler",
+        //Allow importing JSON files.
+        "resolveJsonModule": true,
+        //Types to be included when building.
+        "types": [
+            //Support referencing Node library types.
+            "node"
+        ],
+        //Enforce strict type checking.
+        "strict": true,
+        //Force user to NOT use case-insensitivity when importing.
+        "forceConsistentCasingInFileNames": true,
+        //Do not trigger failure if there are variables that
+        //are not used. Makes testing easier.
+        //Leave checking for them to the lint.
+        "noUnusedLocals": false,
+        //Generate TypeScript definitions.
+        "declaration": true,
+        //Create maps indicating how definition files link back
+        //to the original source code.
+        "declarationMap": true,
+        //Since something else is handling compilation,
+        //restrict TypeScript to definitions.
+        "emitDeclarationOnly": true,
+        //Makes it easier to import CommonJS modules into ES Modules.
+        "esModuleInterop": true,
+        //Since we are using a transpiler that operates on individual files,
+        //that means it will have trouble understanding definitions
+        //stretched across multiple files, such as reexporting a type.
+        //This forces stuff like reexporting a type to be explicit
+        //(e.g. "export type { ImportedType };" instead of "export { ImportedType };")
+        "isolatedModules": true,
+        //Tells TypeScript not to optimize away unused imports,
+        //just in case of side effect scripts
+        //(scripts that run logic instead of exporting anything).
+        "verbatimModuleSyntax": true,
+        //Tells TypeScript to only use the type specifically
+        //referred to as opposed to scanning for duplicates.
+        //Speeds up compilation time at the expense of a check.
+        "skipLibCheck": true
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "name": "{{{npmPackageName}}}",
+    "version": "0.0.0",
+    "private": true,
+    "description": "",
+    "author": "",
+    "contributors": [],
+    "keywords": [],
+    "license": "{{{licenseName}}}",
+    "homepage": "{{{homepageUrl}}}",
+    "repository": {
+        "type": "git",
+        "url": "{{{repositoryUrl}}}",
+        "directory": "packages/{{{npmPackageNameUnscoped}}}"
+    },
+    "bugs": {
+        "url": "{{{bugReportUrl}}}"
+    },
+    "type": "module",
+    "sideEffects": false,
+    "scripts": {},
+    "exports": {
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "dist",
+        "src",
+        "LICENSE",
+        "README.md"
+    ],
+    "devDependencies": {},
+    "dependencies": {},
+    "peerDependencies": {},
+    "peerDependenciesMeta": {}
+}

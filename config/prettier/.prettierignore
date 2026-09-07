@@ -1,0 +1,15 @@
+# List of files Prettier should NOT format.
+# Prettier ignore uses Git ignore syntax.
+# Paths are resolved relative to the ignore file.
+# Since the ignore file is two folders from the root,
+# most paths will need "../../" in front of them.
+
+# Script Generated Files
+# Do not format generated documentation.
+../../doc/api/**/*
+
+# Do not format distributables.
+../../packages/*/dist/**/*
+
+# Do not format dynamically generated files.
+../../packages/*/generated/**/*

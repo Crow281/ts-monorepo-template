@@ -1,0 +1,19 @@
+//Configuration object intended to help the editor understand the scripts.
+{
+    //Extended build file. Records the desired compiler options.
+    "extends": "./config/ts/tsconfig.base.json",
+
+    //List of glob patterns indicating which files to build.
+    "include": [
+        //Select every non-project script.
+        "."
+    ],
+
+    //List of glob patterns indicating which files NOT to build.
+    "exclude": [],
+
+    "compilerOptions": {
+        //Since we are using TSX and some project scripts might import other TS files.
+        "allowImportingTsExtensions": true
+    }
+}

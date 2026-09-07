@@ -1,0 +1,247 @@
+# Scripts
+
+A guide to useful NPM scripts for this project.
+
+## Add Package
+
+Provided that you have setup the
+[template config](../../config/template/template.config.ts)
+properly,
+this command automates adding a new package to the monorepo
+for you.
+Upon calling the command, it will request the name
+for your new package and then create it for you with suitable defaults.
+
+For more info, see the Creating a New Package section of
+[this page](./template/Setup.md).
+
+If you want a more detailed guide,
+focusing on the templating system itself, you can read
+[this article](./template/Structure.md#Template).
+
+```Console
+npm run add-package
+```
+
+## Knip
+
+[Knip](https://www.npmjs.com/package/knip)
+allows you to search your project for any unused dependencies and the like.
+
+```Console
+npm run knip
+```
+
+The knip config file is located at:
+[{project}/config/knip/knip.config.ts](../../config/knip/knip.config.ts)
+
+If you have a package that is being used in a way that knip cannot
+detect, then you can add its name to config property
+ignoreDependencies.
+
+If one of your files is conducting a valid import in a way that
+knip does not recognize, then you can add it to config property
+ignoreUnresolved.
+
+## Lint
+
+The following script allows you to use
+[ESLint](https://www.npmjs.com/package/eslint)
+to search your project code for problems.
+
+```Console
+npm run lint
+```
+
+## Fix
+
+The following script allows you to use
+[ESLint](https://www.npmjs.com/package/eslint)
+to fix any project coding problems it finds.
+
+```Console
+npm run fix
+```
+
+## Format
+
+This script allows you to use
+[Prettier](https://www.npmjs.com/package/prettier)
+to keep code formatting consistent, imports organized, etc.
+
+```Console
+npm run format
+```
+
+## Clean
+
+The parent script for all cleaning of this project,
+deleting script generated files like your build.
+
+```Console
+npm run clean
+```
+
+### Clean: Dist
+
+This script will delete everything you built to the
+"{project}/package/*/dist"
+folders.
+
+```Console
+npm run clean:dist
+```
+
+### Clean: Doc
+
+Deletes the TypeDoc you built to
+"{project}/doc/api/latest".
+
+```Console
+npm run clean:doc
+```
+
+## Build
+
+Tells
+[TSDown](https://www.npmjs.com/package/tsdown)
+to build every package in this project into the
+package dist folder so that they can be
+uploaded and distributed.
+
+```Console
+npm run build
+```
+
+## Dev
+
+Tells
+[TSDown](https://www.npmjs.com/package/tsdown)
+to keep a watch for source file changes and rebuild
+the distributables as you edit them.
+
+```Console
+npm run dev
+```
+
+## Test
+
+Tells
+[Vitest](https://www.npmjs.com/package/vitest)
+to run all of your unit tests,
+allowing you to ensure that your code changes haven't broken anything.
+
+```Console
+npm run test
+```
+
+For a brief overview of how to create new unit tests,
+you can read
+[this document here](./template/Test.md).
+
+## Release
+
+Tells
+[bumpp](https://www.npmjs.com/package/bumpp)
+to automate bumping the project's version to the next.
+
+1. First, bumpp will ask you what kind of version update you are making:
+
+- Major: An update with breaking changes that might require dependants to update themselves for.
+- Minor: An update that adds new features, but doesn't break backwards compatibility.
+- Patch: An update that doesn't modify features and simply fixes bugs or optimizes performance.
+- Next: The default, this will automatically determine what the version should be updated to. If on a prerelease, it will increment the prerelease, if on a regular version, it will increment the patch.
+- Pre: Various options for creating prerelease beta test packages.
+
+2. It will update the NPM package(s) accordingly with the new version.
+3. It will create Git commit, containing a version tag and the updated package files.
+
+```Console
+npm run release
+```
+
+## Prepublish Only
+
+This isn't really a script to be run by the user,
+but a hook to the package manager.
+It makes it so that whenever you publish your package,
+the project will automatically call this script first.
+Since the hook is set to the build command,
+it will build the project before publishing.
+
+## Document
+
+This script allows you to use
+[TypeDoc](https://www.npmjs.com/package/typedoc)
+to build documentation for all your TypeScript files.
+It outputs them to
+"{project}/doc/api/latest"
+as a series of web pages that you can
+then upload to the documentation website.
+If you are using a public git,
+you are advised to wait until
+all changes are committed so that
+it can link the documentation to
+your source files.
+
+```Console
+npm run doc
+```
+
+As a live example, the original template project this was derived from
+provides the API for the sample code via GitHub Pages.
+It is located
+[here](https://crow281.github.io/ts-monorepo-template/doc/api/latest/).
+Github hosts the files located
+[here](https://github.com/Crow281/ts-monorepo-template/tree/gh-pages/).
+
+To do the same for a new project:
+
+- Create your own new Git branch called "gh-pages".
+- Commit the web resources generated by TypeDoc somewhere on this branch.
+- Go to the Git project's settings and click on the "Pages" button
+  to open the GitHub Pages menu. You can select the "gh-pages" branch
+  to host it.
+
+Whenever you have a major update, you will probably want to archive
+the old documentation in a folder named after the version it referred to.
+
+## NPM Package Updates
+
+A brief guide to updating your project's NPM dependencies.
+
+Note that "{project}/.npmrc" has been configured to require
+packages to have existed for a minimum amount of time
+so that the community can double check for any security hazards.
+It has also been configured to prevent post-install scripts from
+running by default.
+
+You can use the following console command to update the project for
+any minor version changes to its devDependencies and dependencies.
+
+```Console
+npm update
+```
+
+You can use the following console command to check if any of the
+project's dependencies are outdated, especially in terms of major versions:
+
+```Console
+npm outdated
+```
+
+If you need a more thorough package update check that
+ignores the semantic versioning range,
+you can install and use the following tool:
+
+```Console
+npx npm-check-updates
+```
+
+If you want to double check for any known security hazards,
+you can use the following command.
+Note that update will also run its own audit:
+
+```Console
+npm audit
+```
