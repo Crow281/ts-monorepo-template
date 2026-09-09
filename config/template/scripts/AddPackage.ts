@@ -151,6 +151,7 @@ async function addNewPackage(
     //Get a list of all of the template files.
     const fileDirents = await readdir(PACKAGE_TEMPLATE_PATH, {
         withFileTypes: true,
+        recursive: true,
     });
 
     //List of promises we are waiting on.
@@ -158,8 +159,14 @@ async function addNewPackage(
 
     //Iterate the template files.
     for (const fileDirent of fileDirents) {
+        //If this is a gitkeep file, ignore it.
+        //It only exists to mark the existence of a directory in git.
+        if (fileDirent.name === ".gitkeep") {
+            continue;
+        }
+
         //Calculate the full file path.
-        const filePath: string = join(PACKAGE_TEMPLATE_PATH, fileDirent.name);
+        const filePath: string = join(fileDirent.parentPath, fileDirent.name);
 
         //Calculate its path relative to the template root.
         const relativeFilePath: string = relative(

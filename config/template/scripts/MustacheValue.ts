@@ -40,4 +40,4 @@ export type MustacheValue =
     //An array of mustache values.
     | MustacheValue[]
     //An object mapping strings to further mustache values.
-    | { [key: string]: MustacheValue };
+    | { [key: string]: MustacheValue | undefined };
