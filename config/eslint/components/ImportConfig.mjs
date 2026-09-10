@@ -23,6 +23,7 @@
  */
 import * as importAlias from "@limegrass/eslint-plugin-import-alias";
 import { importX } from "eslint-plugin-import-x";
+import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 
 /**
  * The ESLint configuration integrating import checking.
@@ -32,6 +33,32 @@ const config = [
     //Setup default import checking.
     importX.flatConfigs.recommended,
     importX.flatConfigs.typescript,
+
+    //Tell importX how to resolve imports.
+    {
+        settings: {
+            "import-x/resolver-next": [
+                createTypeScriptImportResolver({
+                    //Tells the resolver to check
+                    //for the specialized types package if needed.
+                    alwaysTryTypes: true,
+
+                    //Tell eslint to stop complaining about
+                    //multiple projects since it's necessary here.
+                    noWarnOnMultipleProjects: true,
+
+                    //Tells importer where to find tsconfig files.
+                    project: [
+                        //tsconfig file for the source scripts.
+                        "./packages/*/tsconfig.json",
+
+                        //tsconfig file for the unit test scripts.
+                        "./packages/*/tests/tsconfig.json"
+                    ]
+                })
+            ]
+        }
+    },
 
     //Enforces import aliases for various project scripts.
     //This will use the nearest tsconfig to define import aliases,
