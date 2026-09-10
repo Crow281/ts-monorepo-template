@@ -30,7 +30,12 @@ import type { UserConfig } from "tsdown";
 const config: UserConfig = defineConfig({
     //Tell tsdown to use workspace mode,
     //and that there are multiple packages to build.
-    workspace: true,
+    workspace: {
+        //Select the specific spot the packages to operate are in.
+        include: [
+            "packages/*"
+        ]
+    },
 
     //Enables generation of TypeScript declaration files,
     //the files explaining the types of each item in the project.
