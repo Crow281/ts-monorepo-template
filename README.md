@@ -1,4 +1,4 @@
-# ts-monorepo-template
+# Workspace
 
 ## Introduction
 

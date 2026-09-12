@@ -33,7 +33,7 @@ import { EntryPointStrategy } from "typedoc";
  */
 const config = {
     //How much we want typedoc to print to console. Defaults to "Info".
-    logLevel: "Verbose",
+    logLevel: "Info",
     //List of plugins we are adding to typedoc.
     plugin: [
         //This plugin enables typedoc to understand
@@ -44,11 +44,20 @@ const config = {
         "./plugin/TagInternal.js",
     ],
     //Tells TypeDoc how to link to 3rd party library types.
-    externalSymbolLinkMappings: {},
+    externalSymbolLinkMappings: {
+        //Note that "!" must be appended (e.g. {@link !Error}) for globals.
+        //The typedoc-plugin-mdn-links will handle most of these.
+        "global": {
+        },
+    },
     //Search all of the packages in the monorepo.
     entryPointStrategy: EntryPointStrategy.Packages,
     //List of locations to search for packages.
     entryPoints: ["../../packages/*"],
+    //Ensure that an entry is always created,
+    //even if there is only one entry.
+    //Ensures consistency even if the monorepo only has one package.
+    alwaysCreateEntryPointModule: true,
     //What scripts shouldn't be documented.
     exclude: [],
     //The workspace itself does not have a version,

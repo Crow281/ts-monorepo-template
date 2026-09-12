@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import BaseConfig from "../../config/typedoc/typedoc.base.config.js";
+import BaseConfig from "../../config/typedoc/typedoc.package.config.js";
 
 /**
  * The configuration object this specific package is using for TypeDoc.
